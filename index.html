@@ -1,68 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peptide Mass Spectrometry Fragment Analyzer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peptide Fragment Analyzer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="main-content">
-      <header>
-        <h1>Peptide Mass Spectrometry Fragment Analyzer</h1>
-        <p class="subtitle">Calculate possible fragments based on mass spectrum values</p>
-      </header>
-
-      <div class="two-column-layout">
+    <div class="container">
         <div class="input-section">
-          <div class="input-group">
-            <div class="input-header">
-              <label>Peptide Sequence <span class="hint">(type or use buttons)</span></label>
-              <div class="button-group">
-                <button id="clearPeptide" class="icon-button" title="Clear sequence">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                </button>
-                <button id="deleteLastPeptide" class="icon-button" title="Delete last peptide">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/><line x1="18" x2="12" y1="9" y2="15"/><line x1="12" x2="18" y1="9" y2="15"/></svg>
-                </button>
-              </div>
+            <h1>Peptide Fragment Analyzer</h1>
+            <div class="input-group">
+                <div class="label-group">
+                    <label for="sequence">Amino Acid Sequence:</label>
+                    <select id="sequenceMode" class="right-aligned">
+                        <option value="1">1-Letter Codes</option>
+                        <option value="3">3-Letter Codes</option>
+                    </select>
+                </div>
+                <textarea id="sequence" rows="6" placeholder="Enter amino acid sequence..."></textarea>
             </div>
-            <textarea id="peptideSequence" placeholder="Enter three-letter codes (e.g., ALA GLY SER) or use buttons below"></textarea>
-            <div class="error-message" id="peptideError"></div>
-          </div>
-
-          <div id="aminoAcidButtons" class="amino-acid-grid"></div>
-
-          <div class="input-group">
-            <div class="input-header">
-              <label>Mass Spectrum Values <span class="hint">(space-separated)</span></label>
-              <button id="clearSpectrum" class="icon-button" title="Clear values">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-              </button>
+            <div class="input-group horizontal">
+                <div class="sub-group">
+                    <label for="massSpectrum">Mass Spectrum Value (Da):</label>
+                    <input type="number" id="massSpectrum" min="0" value="0">
+                </div>
+                <div class="sub-group">
+                    <label for="additionalMass">Additional Molecule Mass (Da):</label>
+                    <input type="number" id="additionalMass" min="0" value="0">
+                </div>
             </div>
-            <textarea id="spectrumValues" placeholder="Enter mass values (e.g., 200.5 350.2 175.8)"></textarea>
-            <div class="error-message" id="spectrumError"></div>
-          </div>
-
-          <button id="calculateButton" class="calculate-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            Calculate Possible Fragmentations
-          </button>
+            <button id="calculate">Calculate Fragments</button>
         </div>
-
-        <div class="results-section">
-          <div class="results-header">
-            <h2>Possible Fragmentations</h2>
-          </div>
-          <div id="results" class="results"></div>
+        <div class="output-section">
+            <div class="header-group">
+                <h2>Analysis Results</h2>
+                <div class="results-control">
+                    <label for="maxResults">Max Results:</label>
+                    <input type="number" id="maxResults" min="1" value="10">
+                </div>
+            </div>
+            <div class="sequence-display">
+                <strong>Input Sequence:</strong> <span id="formattedSequence"></span>
+            </div>
+            <div class="results-container">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Fragment Sequence</th>
+                            <th>Molar Mass (Da)</th>
+                            <th>Mass Difference (Da)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

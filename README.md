@@ -1,49 +1,43 @@
-# Peptide Mass Spectrometry Fragment Analyzer
+# Peptide Fragment Analyzer
 
-A web-based tool for calculating possible peptide fragmentations based on mass spectrum values. This tool helps researchers analyze peptide sequences by finding potential fragmentations that match given mass spectrum data.
+A web-based tool for analyzing peptide fragments and identifying matches based on mass spectrometry data.
+
+## Overview
+
+The Peptide Fragment Analyzer is a client-side application that allows researchers and scientists to:
+
+- Input amino acid sequences using 1-letter or 3-letter codes
+- Generate all possible fragments from a peptide sequence
+- Calculate the molar mass of each fragment
+- Compare fragment masses against mass spectrum data
+- Find the best matching fragments based on mass difference
 
 ## Features
 
-- Interactive peptide sequence input with amino acid buttons
-- Mass spectrum value analysis
-- Customizable attached molecule mass and error margin
-- Real-time validation
-- Clear visualization of results
-- Support for all standard amino acids
+- **Flexible Input**: Accept amino acid sequences in both 1-letter (e.g., ACGT) and 3-letter (e.g., Ala-Cys-Gly-Thr) formats
+- **Mass Calculations**: Calculate precise molecular weights for all possible fragments
+- **Additional Mass Support**: Account for chemical modifications or adducts
+- **Sortable Results**: Display fragments sorted by closest match to target mass
+- **Configurable Output**: Set maximum number of results to display
 
 ## Usage
 
-1. Enter a peptide sequence using the amino acid buttons or type three-letter codes (e.g., ALA GLY SER)
-2. Input mass spectrum values (space-separated numbers)
-3. Adjust molecule mass and error margin if needed
-4. Click "Calculate Possible Fragmentations" to see results
+1. Enter the amino acid sequence in the text area
+2. Select the sequence format (1-letter or 3-letter codes)
+3. Input the target mass from your mass spectrometry data
+4. Add any additional molecule mass if applicable
+5. Click "Calculate Fragments" to generate results
+6. Review the closest matches sorted by mass difference
 
-## Settings
+## Access the Tool
 
-- **Molecule Mass**: Customize the mass of the molecule (default: 0 Da)
-- **Error Margin**: Set the acceptable margin of error for mass matching (default: ±0.1 Da)
+This is a standalone web application that runs entirely in the browser.  
+Simply visit [https://kevintang6142.github.io/peptide/](https://kevintang6142.github.io/peptide/) to use the tool.
 
-## Supported Amino Acids
+## Technical Details
 
-The tool supports all 20 standard amino acids with their respective masses:
-
-- ALA (89.1 Da)
-- ARG (174.2 Da)
-- ASN (132.1 Da)
-- ASP (133.1 Da)
-- CYS (121.2 Da)
-- GLN (146.2 Da)
-- GLU (147.1 Da)
-- GLY (75.1 Da)
-- HIS (155.2 Da)
-- ILE (131.2 Da)
-- LEU (131.2 Da)
-- LYS (146.2 Da)
-- MET (149.2 Da)
-- PHE (165.2 Da)
-- PRO (115.1 Da)
-- SER (105.1 Da)
-- THR (119.1 Da)
-- TRP (204.2 Da)
-- TYR (181.2 Da)
-- VAL (117.1 Da)
+- Built with vanilla JavaScript, HTML, and CSS
+- Performs all calculations locally in the browser
+- Includes a comprehensive database of amino acid masses
+- Supports all 20 standard amino acids
+- Accounts for water loss in peptide bond formation
