@@ -124,13 +124,16 @@ function updateResults() {
 
   // Display results
   elements.resultsTable.innerHTML = results.slice(0, maxResults)
-      .map(result => `
-          <tr>
-              <td>${formatSequence(result.sequence)}</td>
-              <td>${result.mass}</td>
-              <td>${result.difference}</td>
-          </tr>
-      `).join('');
+      .map(result => {
+          const formattedDifference = result.difference > 0 ? `+${result.difference}` : result.difference;
+          return `
+              <tr>
+                  <td>${formatSequence(result.sequence)}</td>
+                  <td>${result.mass}</td>
+                  <td>${formattedDifference}</td>
+              </tr>
+          `;
+      }).join('');
 }
 
 // Event listeners
