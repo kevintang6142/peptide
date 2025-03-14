@@ -77,7 +77,7 @@ function calculateMolarMass(fragment) {
   if (fragment.length === 0) return 0;
   let mass = fragment.reduce((sum, aa) => sum + aminoAcids[aa][1], 0);
   if (fragment.length > 1) {
-      mass -= 18 * (fragment.length - 1); // Subtract water mass for peptide bonds
+      mass -= 18.01528 * (fragment.length - 1); // Subtract water mass for peptide bonds
   }
   return Math.round(mass);
 }
